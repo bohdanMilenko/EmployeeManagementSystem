@@ -2,7 +2,29 @@ package Service;
 
 import Entities.Employee;
 
-public class EmployeeService {
+import java.io.Serializable;
 
-    static Employee employeeService =
+public class EmployeeService implements Serializable {
+
+    private static volatile EmployeeService singletonInstance;
+
+    private EmployeeService() {
+
+    }
+
+    public static synchronized  EmployeeService getInstance(){
+        if(singletonInstance == null){
+            synchronized (EmployeeService.class) {
+                if(singletonInstance == null) {
+                    singletonInstance = new EmployeeService();
+                }
+            }
+        }
+
+        return singletonInstance;
+    }
+
+    public EmployeeService readResolve(){
+        return getInstance();
+    }
 }

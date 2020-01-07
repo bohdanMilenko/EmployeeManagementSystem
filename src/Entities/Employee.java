@@ -9,9 +9,11 @@ public class Employee {
     private String name;
     private String surname;
     private LocalDate yearOfBirth;
+    private String position;
     private VacationPackage vacationPackage;
     private SickDays sickDays;
     private List<TimeCard> timeCards = new ArrayList<>();
+    private List<Employee> employeeList;
 
     private Employee(String name, String surname, LocalDate yearOfBirth) {
         this.name = name;
