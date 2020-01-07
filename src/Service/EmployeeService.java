@@ -27,4 +27,8 @@ public class EmployeeService implements Serializable {
     public EmployeeService readResolve(){
         return getInstance();
     }
+
+    public void createNewEmployee(){
+
+    }
 }
