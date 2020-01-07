@@ -1,16 +1,11 @@
 package com.ManagemetSystem;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.client.*;
-import com.sun.net.httpserver.Authenticator;
+import com.mongodb.client.ListDatabasesIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-
-import javax.print.Doc;
-import java.util.concurrent.Flow;
 
 import static java.util.Collections.singletonList;
 
@@ -20,7 +15,7 @@ public class Main {
 
         MongoClient mongoC = new MongoClient();
 
-        ListDatabasesIterable<Document> availableDB =  mongoC.listDatabases();
+        ListDatabasesIterable<Document> availableDB = mongoC.listDatabases();
 
         MongoDatabase mongoDatabase = mongoC.getDatabase("Employees");
         //mongoDatabase.createCollection("General Info");
@@ -44,7 +39,7 @@ public class Main {
         Document myDoc = (Document) mongoCollection.find().first();
         System.out.println(myDoc.toJson());
 
-        try(MongoCursor<Document> cursor = mongoCollection.find().iterator()) {
+        try (MongoCursor<Document> cursor = mongoCollection.find().iterator()) {
             while (cursor.hasNext()) {
                 System.out.println(cursor.next().toJson());
             }
